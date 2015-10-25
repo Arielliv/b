@@ -1,0 +1,54 @@
+<!doctype html>
+<html ng-app="ui.bootstrap.demo">
+
+<head>
+    <link href="/public/vandors/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body ng-controller="AppCtrl">
+
+<div  >
+    <button type="button" class="btn btn-default" ng-click="openR()"> add user </button>
+    <button type="button" class="btn btn-default" ng-click="Del()"> connect </button>
+    <div class="btn btn-success" ng-show="User.connected">{{User.userName}} is connected</div>
+    <table>
+        <thead>
+        <th class="col-lg-1">Username</th>
+        <th class="col-lg-1">Password</th>
+        <th class="col-lg-1">First name</th>
+        <th class="col-lg-1">Last name</th>
+        <th class="col-lg-1">index</th>
+        <th class="col-lg-1">count Connect</th>
+        <th class="col-lg-1">count Paging</th>
+        <th class="col-lg-1">count Order</th>
+        <th class="col-lg-1">count Tap Name</th>
+        </thead>
+        <tbody>
+        <tr ng-repeat="user in Users.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage)) track by $index">
+            <td class="col-lg-1" ng-click="tapName(user)">{{user.userName}}</td>
+            <td class="col-lg-1">{{user.passWord}}</td>
+            <td class="col-lg-1">{{user.name}}</td>
+            <td class="col-lg-1">{{user.lastName}}</td>
+            <td class="col-lg-1">{{$index}}</td>
+            <td class="col-lg-1">{{user.countConnect}}</td>
+            <td class="col-lg-1">{{user.countPaging}}</td>
+            <td class="col-lg-1">{{user.countOrder}}</td>
+            <td class="col-lg-1">{{user.countTapName}}</td>
+        </tr>
+        </tbody>
+    </table>
+    <div>
+        <pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-md" boundary-links="true" rotate="false" num-pages="numPages" ng-click="pageChanged(user)" items-per-page="itemsPerPage"></pagination>
+    </div>
+</div>
+</body>
+<footer>
+    <script src="/public/vandors/angular/angular.min.js"></script>
+    <script src="/public/vandors/angular-ui/ui-bootstrap-tpls-0.14.2.min.js"></script>
+    <script src="/public/JS/app.js"></script>
+    <script src="/public/JS/ConnectModalController.js"></script>
+    <script src="/public/JS/RegisterModalController.js"></script>
+    <script src="/public/vandors/restangular/restangular.min.js"></script>
+    <script src="/public/vandors/underscore/underscore.js"></script>
+</footer>
+</html>
