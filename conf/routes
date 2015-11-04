@@ -10,5 +10,6 @@ GET     /public/*file               controllers.Assets.at(path="/public", file)
 
 
 GET     /api/get                    controllers.Users.getUsers()
-DELETE  /api/delete?username        controllers.Users.delUserN(username)
+DELETE  /api/delete/:username        controllers.Users.delUserN(username)
+POST    /api/post/user              controllers.Users.AddUserS()
     

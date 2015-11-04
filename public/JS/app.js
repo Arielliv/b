@@ -22,12 +22,20 @@ app = angular.module('ui.bootstrap.demo', [ 'ui.bootstrap' , 'ionic.utils','rest
 app.controller('AppCtrl', function($scope, $modal, $localstorage, $filter, Restangular) {
     var Accounts = Restangular.all('api');
     var baseAccounts = Accounts.one('get');
-    var source = Accounts.one('delete');
+    var source = Accounts.one('delete','a');
+    var source2 = Accounts.one('post');
+
+
+    $scope.aad = function(){
+        console.log("bla");
+        var user = {username:"c",FirstName:"c",LastName:"c",Password:"c"}
+        source2.post("user",user);
+    };
 
     $scope.Del = function(){
         console.log("bla");
-        source.remove('{username : a}');
-    }
+        source.remove();
+    };
     if(baseAccounts.get()){
         $scope.Users = baseAccounts.getList().$object
         console.log($scope.Users);

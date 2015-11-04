@@ -1,5 +1,6 @@
 package controllers;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -18,8 +19,7 @@ public class Users extends Controller {
     }};
 
 
-    public void AddUser(String UserName,String FirstName,String LastName,String Password){
-        count ++;
+    public static void AddUser(String UserName,String FirstName,String LastName,String Password){
         User count = new User(UserName,FirstName,LastName,Password);
         Test.add(count);
     }
@@ -64,6 +64,16 @@ public class Users extends Controller {
     public static Result delUserN(String username){
         DelUser(username);
         return ok("deleted");
+    }
+
+    public static Result AddUserS(){
+        JsonNode requestBody = request().body().asJson();
+        String UserName = requestBody.get("username").asText();
+        String FirstName = requestBody.get("FirstName").asText();
+        String LastName = requestBody.get("LastName").asText();
+        String Password = requestBody.get("Password").asText();
+        AddUser(UserName, FirstName, LastName, Password);
+        return ok("deljted");
     }
 }
 
